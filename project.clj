@@ -1,5 +1,5 @@
-(defproject slamhound "1.5.6-SNAPSHOT"
-  :description "Rips your ns apart and reconstructs it. We have the technology."
+(defproject b-ryan/slamhound "1.5.6-SNAPSHOT"
+  :description "b-ryan fork of technomancy's slamhound"
   :url "https://github.com/technomancy/slamhound"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
