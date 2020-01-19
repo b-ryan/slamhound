@@ -190,7 +190,7 @@
   [type missing body old-ns-map]
   (case type
     :import (into (ns-import-candidates missing)
-                  (get @search/available-classes-by-last-segment missing))
+                  (@search/available-classes-by-last-segment missing))
     :alias (let [cs (alias-candidates type missing body)]
              (if (seq cs)
                cs

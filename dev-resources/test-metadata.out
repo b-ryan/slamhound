@@ -8,5 +8,5 @@
            (java.util Iterator LinkedList UUID)
            (java.util.concurrent.atomic AtomicBoolean AtomicLong)
            (java.util.regex Pattern)
-           (javax.annotation.processing SupportedOptions)
-           (javax.xml.ws WebServiceRefs)))
+           (javax.swing CellEditor)
+           (javax.swing.tree TreeSelectionModel)))

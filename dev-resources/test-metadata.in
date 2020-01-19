@@ -40,8 +40,8 @@
   (defprotocol IFoo
     (foo [this]))
 
-  (deftype Foo [^{WebServiceRefs []} field]
-    ^{SupportedOptions []}
+  (deftype Foo [^{CellEditor []} field]
+    ^{TreeSelectionModel []}
     IFoo
     (^{Retention RetentionPolicy/RUNTIME} foo [this]))
 

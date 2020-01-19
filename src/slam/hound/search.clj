@@ -178,6 +178,30 @@
        (remove clojure-fn-file?)
        (map symbol)))
 
+(def search-packages ["java.lang" "java.util"])
+
+(def search-packages
+  (delay (->> (Package/getPackages)
+              (map #(.getName %))
+              (filter #(.startsWith % "java")))))
+
+(defn- try-loading-from-common-packages
+  ;; Java 9 removed sun.boot.class.path and from my own searching I could not
+  ;; find any option for getting the boot classpath. Eventually I came across
+  ;; the suggestion here https://stackoverflow.com/a/13216468 and it seemed
+  ;; like the best option. There could very well be something better / more
+  ;; robust.
+  [class-name]
+  (->> @search-packages
+       (map #(try (-> (Class/forName (str % "." (name class-name)))
+                      (.getName)
+                      (symbol)
+                      (vector))
+                  (catch ClassNotFoundException exc)))
+       (some identity)))
+
 (def available-classes-by-last-segment
   (delay
-    (group-by #(symbol (peek (string/split (str %) #"\."))) available-classes)))
+    (let [classes (group-by #(symbol (peek (string/split (str %) #"\.")))
+                            available-classes)]
+      #(or (classes %) (try-loading-from-common-packages %)))))
